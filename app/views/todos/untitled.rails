@@ -1,0 +1,36 @@
+<%= form_for(@task) do |t| %>
+  <div class="field">
+    <%= t.label :desc %>
+    <%= t.text_field :desc %>
+  </div>
+  <div class="field">
+    <%= t.label :priority %>
+    <%= t.select :priority, options_for_select([["select",""],["Low","3"],["Medium","2"],["High","1"]])%>
+  </div>
+  <div class="field">
+    <%= t.label :deadline %>
+    <!-- <%= t.datetime_select :deadline %> -->
+    <%= Time.use_zone("Chennai") do
+  	t.datetime_select :deadline
+	end %>
+  </div>
+  <div class="field">
+    <%= t.label :reminder %>
+  <!--  <%= t.datetime_select :reminder %> -->
+  <%= Time.use_zone("Chennai") do
+  	t.datetime_select :reminder
+	end %>
+  </div>
+  <div class="field">
+    <%= t.label :notify %>
+    <%= t.select :notify, options_for_select([["select",""],["No","0"],["Yes","1"]]) %>
+  </div>
+ <!-- <div class="field">
+    <%= t.label :status %>
+    <%= t.select :status, options_for_select([["select",""],["Open","0"],["Done","1"]]) %> 
+     2 - Archive 
+  </div> -->
+  <div class="action">
+  <%= t.submit %>
+  </div>
+<%end%>

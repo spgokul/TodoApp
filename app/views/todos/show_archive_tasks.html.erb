@@ -1,0 +1,33 @@
+<div class="container">
+<h2>Archived Tasks</h2>
+<%if @task.present? %>
+<table class="table table-striped">
+	<tr>
+	<th>Task List</th>
+	<th>Priority</th>
+	<th>Deadline</th>
+	<th></th>
+	</tr>
+<%@task.each do |t|%>
+<tr>
+<td><%= t.desc%></td>
+<td><%= if t.priority == 1 
+	"High"
+elsif t.priority == 2
+	"Medium"
+else
+	"Low"
+end
+%></td>
+<td><%= t.deadline.strftime("%d/%m/%y: %H:%M %a")%></td>
+<td><%= link_to 'Delete', t, method: :delete, data: { confirm: "You sure?" } %></td>
+</tr>
+<%end%>
+</table>
+<% else %>
+<%= "Uh Oh ! There are no Archived tasks" %><br>
+<%end%>
+<%= link_to 'Home', root_path%>
+<%= link_to 'Show Open Tasks', show_open_tasks_path %>
+<%= link_to 'Show Completed Tasks', show_done_tasks_path %>
+</div>

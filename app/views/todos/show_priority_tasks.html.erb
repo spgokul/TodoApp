@@ -1,0 +1,37 @@
+<h3>Listing Tasks based on Priority </h3>
+<div class="container">
+<h3>Priority Tasks Tasks</h3>
+<%if @task.present? %>
+<table class="table table-striped">
+	<tr>
+	<th>Task List</th>
+	<th>Priority</th>
+	<th>Deadline</th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+<%@task.each do |t|%>
+<tr>
+<td><%= t.desc%></td>
+<td><%= if t.priority == 1 
+	"High"
+elsif t.priority == 2
+	"Medium"
+else
+	"Low"
+end
+%></td>
+<td><%= t.deadline.strftime("%d/%m/%y: %H:%M %a")%></td>
+<td><%= link_to 'Move to Open Tasks', move_to_open_tasks_path(t)%></td>
+<td><%= link_to 'Move to Archive', move_to_archive_path(t)%></td>
+<td><%= link_to 'Delete', t, method: :delete, data: { confirm: "You sure?" }  %></td>
+</tr>
+<%end%>
+</table>
+<% else %>
+<%= "Uh Oh ! There are no completed tasks" %><br>
+<%end%>
+<%= link_to 'Home', root_path%>
+<%= link_to 'Show Open Tasks', show_open_tasks_path%>
+</div>
